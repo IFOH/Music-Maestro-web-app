@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <h2>Add or remove songs</h2>
+    <hr>
+
+    <table>
+        <tr>
+            <th>All songs</th>
+        </tr>
+        {% for current_song in songs %}
+            <tr>
+                <td>
+                    {{ song.title }}
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>
+                <p>Add songs</p>
+            </td>
+        </tr>
+        {% for missing_song in songs %}
+            <tr>
+                <td>
+                    {{ song.title }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+
+{% endblock content %}

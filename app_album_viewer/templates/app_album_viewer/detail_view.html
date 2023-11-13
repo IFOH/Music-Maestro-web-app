@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <h2>{{ album.title }}</h2>
+    <hr>
+    <p>{{ album.description }}</p>
+    <hr>
+
+    <table>
+        <tr>
+            <th>Tracklist</th>
+            <input type="button" onclick= "location.href='{%url 'album_edit' album.id %}';" value="New" />
+        </tr>
+        
+        {% for song in songs %}
+            <tr>
+                <td>
+                    {{ song.title }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>My Music Maestro</title>
+    {% endblock title%}
+</head>
+<body>
+    {% block header %}
+    <a href='/'>Home</a>
+    <a href='/albums/'>Albums</a>
+    <a href='/contact/'>Contact</a>
+    <hr>
+    {% endblock header %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block footer %}
+    <hr>
+    <p>This is my footer</p>
+    {% endblock footer %}
+</body>
+</html> 
