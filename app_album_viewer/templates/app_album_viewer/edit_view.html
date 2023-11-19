@@ -12,19 +12,11 @@
         {% for current_song in songs %}
             <tr>
                 <td>
-                    {{ song.title }}
-                </td>
-            </tr>
-        {% endfor %}
-        <tr>
-            <td>
-                <p>Add songs</p>
-            </td>
-        </tr>
-        {% for missing_song in songs %}
-            <tr>
-                <td>
-                    {{ song.title }}
+                    {% if current_song.in_album %}
+                        {{ current_song.obj.title }} is in
+                    {% else %}
+                        {{ current_song.obj.title }} is not in
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

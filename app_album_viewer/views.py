@@ -19,6 +19,12 @@ def detail_view(request, id):
 def edit_view(request, id):
     context = {}
     current_album = get_object_or_404(Album, pk=id)
-    context["current_songs"] = Song.objects.filter(album=current_album)
-    context["missing_songs"] = Song.objects.exclude(album=current_album)
+    songs = []
+    for song in Song.objects.all():
+        if song.album == current_album:
+            songs.append({"obj":song, "in_album":True})
+        else:
+            songs.append({"obj":song, "in_album":False})
+    
+    context["songs"] = songs
     return render(request, 'app_album_viewer/edit_view.html', context)
