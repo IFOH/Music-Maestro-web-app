@@ -9,17 +9,23 @@
         <tr>
             <th>All songs</th>
         </tr>
-        {% for current_song in songs %}
-            <tr>
-                <td>
-                    {% if current_song.in_album %}
-                        {{ current_song.obj.title }} is in
-                    {% else %}
-                        {{ current_song.obj.title }} is not in
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
+        <tr>
+            <td>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for current_song in songs %}
+                        {% if current_song.in_album %}
+                            <input type="checkbox" name="song_choice" value="True" id="song" checked>
+                            <label for="song">{{ current_song.obj.title }}</label><br>
+                        {% else %}
+                            <input type="checkbox" name="song_choice" value="True" id="song">
+                            <label for="song">{{ current_song.obj.title }}</label><br>
+                        {% endif %}
+                    {% endfor %}
+                    <input type="submit" value="Submit" />
+                </form>
+            </td>
+        </tr>
     </table>
 </body>
 
