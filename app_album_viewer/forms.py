@@ -1,11 +1,8 @@
 from django import forms
-from .models import Album
+from .models import *
 
-# creating a form
 class AlbumForm(forms.ModelForm):
-    # create meta class
     class Meta:
-        # specify model to be used
         model = Album
         fields = ['title', 'description']
         widgets = {
@@ -20,3 +17,11 @@ class AlbumForm(forms.ModelForm):
                 'cols' : 60,
             }),
         }
+
+song_list = Song.objects.all()
+
+class SongSelectionForm(forms.ModelForm):
+    class Meta:
+        model = Song
+        fields = ['album']
+        widget = forms.CheckboxSelectMultiple

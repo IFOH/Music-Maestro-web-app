@@ -11,19 +11,28 @@
         </tr>
         <tr>
             <td>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Submit">
+                </form>
+
+
+                {% comment %}
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for current_song in songs %}
                         {% if current_song.in_album %}
-                            <input type="checkbox" name="song_choice" value="True" id="song" checked>
+                            <input type="checkbox" name="song_choice" value={{current_song.obj}} id="song" checked>
                             <label for="song">{{ current_song.obj.title }}</label><br>
                         {% else %}
-                            <input type="checkbox" name="song_choice" value="True" id="song">
+                            <input type="checkbox" name="song_choice" value={{current_song.obj}} id="song">
                             <label for="song">{{ current_song.obj.title }}</label><br>
                         {% endif %}
                     {% endfor %}
                     <input type="submit" value="Submit" />
                 </form>
+                {% endcomment %}
             </td>
         </tr>
     </table>
