@@ -9,6 +9,7 @@ urlpatterns = [
     path('albums/', include('app_album_viewer.urls')),
     path('account/', include('app_pages.urls')),
     path('contact/', include('app_pages.urls')),
+    path('page/', include('app_pages.urls')),
     path('admin/', admin.site.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -19,20 +19,23 @@ def detail_view(request, id):
 
 def edit_view(request, id):
     context = {}
-    form = SongSelectionForm(request.POST or None)
     current_album = get_object_or_404(Album, pk=id)
     if(request.method == 'POST'):
-        return redirect('album_detail', id=id)
-
-    songs = []
-    for song in Song.objects.all():
-        if song.album == current_album:
-            songs.append({"obj":song, "in_album":True})
+        song_to_update = get_object_or_404(Song, title=request.POST.get("song_choice"))
+        if song_to_update in current_album.song_set.all():
+            current_album.song_set.remove(song_to_update)
         else:
-            songs.append({"obj":song, "in_album":False})
+            current_album.song_set.add(song_to_update)
+        return redirect('album_edit', id=id)
+
+    songs_list = []
+    for song in Song.objects.all():
+        if current_album.song_set.contains(song):
+            songs_list.append({"obj":song, "in_album":True})
+        else:
+            songs_list.append({"obj":song, "in_album":False})
     
-    context["songs"] = songs
-    context["form"] = form
+    context["songs_list"] = songs_list
     return render(request, 'app_album_viewer/edit_view.html', context)
 
 
