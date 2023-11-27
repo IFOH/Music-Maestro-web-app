@@ -2,21 +2,29 @@
 {% block content %}
 
 <body>
-    <h2>Add or remove songs</h2>
+    <h2>Edit album and tracklist</h2>
     <hr>
 
+    {% if messages %}
+	    <div class="messages">
+	    	{% for message in messages %}
+	    		<div>
+	    			{{ message }}
+	    		</div>
+	    	{% endfor %}
+	    </div>
+    {% endif %}
+    
+    <b>Tracklist</b>
     <table>
         <tr>
-            <th>All songs</th>
-        </tr>
-        <tr>
             <td>
-                {% for current_song in songs_list %}
+                {% for song in song_list %}
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ current_song.obj.title }}
-                        <input type="hidden" name="song_choice" value="{{ current_song.obj.title }}">
-                        {% if current_song.in_album %}
+                        {{ song.obj.title }}
+                        <input type="hidden" name="song_choice" value="{{ song.obj.title }}">
+                        {% if song.in_album %}
                             <button type="submit">Remove</button>
                         {% else %}
                             <button type="submit">Add</button>
@@ -26,6 +34,7 @@
             </td>
         </tr>
     </table>
+    <input type="button" onclick="location.href='{% url 'album_detail' album.id%}';" value="Back" />
 </body>
 
 {% endblock content %}

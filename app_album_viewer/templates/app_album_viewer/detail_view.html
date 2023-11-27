@@ -4,23 +4,42 @@
 <body>
     <h2>{{ album.title }}</h2>
     <hr>
+    <b>Description</b>
     <p>{{ album.description }}</p>
     <hr>
 
+    <b>Tracklist</b>
     <table>
-        <tr>
-            <th>Tracklist</th>
-            <input type="button" onclick= "location.href='{%url 'album_edit' album.id %}';" value="Edit" />
-        </tr>
-        
-        {% for song in songs %}
-            <tr>
-                <td>
-                    {{ song.title }}
-                </td>
-            </tr>
-        {% endfor %}
+        {% if song_list|length == 0 %} 
+            <tr><td>There are no songs in the album</td></tr>
+        {% else %}
+            {% for song in song_list %}
+                <tr>
+                    <td>
+                        {{ song.title }}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
     </table>
+    <input type="button" onclick= "location.href='{%url 'album_edit' album.id %}';" value="Edit album" />
+    <hr>
+
+    <b>Comments</b>
+    <table>
+        {% if comment_list|length == 0 %} 
+            <tr><td>There are no comments</td></tr>
+        {% else %}
+            {% for comment in comment_list %}
+                <tr>
+                    <td>
+                        <b>{{ comment.user }}</b>: {{ comment.text }}<br>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+    <input type="button" onclick="location.href='{% url 'albums_index' %}';" value="Back" />
 </body>
 
 {% endblock content %}

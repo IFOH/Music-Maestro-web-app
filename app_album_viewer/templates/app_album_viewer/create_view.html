@@ -4,5 +4,6 @@
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit">
+    <input type="button" onclick="location.href='{% url 'albums_index' %}';" value="Cancel" />
 </form>
 {% endblock content %}

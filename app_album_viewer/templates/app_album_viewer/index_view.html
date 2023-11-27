@@ -8,17 +8,19 @@
 {% block content %}
     <h1>Albums list</h1>
     <hr>
+    <b>Title<b>
     <table>
-        <tr>
-            <th>Title</th>
-        </tr>
-        {% for album in album_list%}
-            <tr>
-                <td>
-                    <a href="{% url 'album_detail' album.id %}">{{ album.title }}</a>
-                </td>
-            </tr>
-        {% endfor %}
+        {% if album_list|length == 0 %}
+            <tr><td>There are no albums</td></tr>
+        {% else %}
+            {% for album in album_list%}
+                <tr>
+                    <td>
+                        <a href="{% url 'album_detail' album.id %}">{{ album.title }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
     </table>
     <input type="button" onclick= "location.href='{%url 'album_create' %}';" value="Add album" />
     </hr>
