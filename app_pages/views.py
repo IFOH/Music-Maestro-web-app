@@ -1,9 +1,9 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login as auth_login
+from . forms import *
 
 
 def home(request):
@@ -19,8 +19,20 @@ def about(request):
     return render(request, 'app_pages/about_view.html',context)
 
 def login(request):
-    context = {}
-    return render(request, 'app_pages/login_view.html',context)
+    if request.user.is_authenticated:
+        return redirect('account')
+    else:
+        context = {}
+        if(request.method == 'POST'):
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                auth_login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, "Invalid login details")
+        return render(request, 'app_pages/login_view.html',context)
 
 @login_required(login_url="login")
 def account(request):
