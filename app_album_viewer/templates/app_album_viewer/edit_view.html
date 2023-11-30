@@ -15,19 +15,26 @@
 	    </div>
     {% endif %}
     
-    <b>Tracklist</b>
+    <b>Edit album</b>
+    <form method="POST">
+        {% csrf_token %}
+        {{ album_form.as_p }}
+        <button type="submit" name="update_album">Update</button>
+    </form>
+
+    <b>Edit tracklist</b>
     <table>
         <tr>
             <td>
                 {% for song in song_list %}
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="POST">
                         {% csrf_token %}
                         {{ song.obj.title }}
                         <input type="hidden" name="song_choice" value="{{ song.obj.title }}">
                         {% if song.in_album %}
-                            <button type="submit">Remove</button>
+                            <button type="submit" name="update_song">Remove</button>
                         {% else %}
-                            <button type="submit">Add</button>
+                            <button type="submit" name="update_song">Add</button>
                         {% endif %}
                     </form>
                 {% endfor %}

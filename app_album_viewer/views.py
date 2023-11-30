@@ -23,19 +23,24 @@ def detail_view(request, id):
 def edit_view(request, id):
     context = {}
     current_album = get_object_or_404(Album, pk=id)
-    #Edit album model
-    album_form = AlbumForm(request.POST or None)
-
-    #Add and remove songs from album
+    album_form = AlbumForm(request.POST or None, instance=current_album)
+    
     if(request.method == 'POST'):
-        song_to_update = get_object_or_404(Song, title=request.POST.get("song_choice"))
-        if song_to_update in current_album.song_set.all():
-            current_album.song_set.remove(song_to_update)
-            messages.success(request, "Song removed")
-        else:
-            current_album.song_set.add(song_to_update)
-            messages.success(request, "Song added")
-        return redirect('album_edit', id=id)
+        #Edit album model
+        if "update_album" in request.POST:
+            if album_form.is_valid():
+                album_form.save()
+                messages.success(request, "Album updated successfully")
+        #Add and remove songs from album
+        elif "update_song" in request.POST:
+            song_to_update = get_object_or_404(Song, title=request.POST.get("song_choice"))
+            if song_to_update in current_album.song_set.all():
+                current_album.song_set.remove(song_to_update)
+                messages.success(request, "Song removed")
+            else:
+                current_album.song_set.add(song_to_update)
+                messages.success(request, "Song added")
+            return redirect('album_edit', id=id)
 
     #Context dictionary
     song_list = []
