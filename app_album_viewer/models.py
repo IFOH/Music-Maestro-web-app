@@ -3,12 +3,12 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class Album(models.Model):
-    cover = None
+    cover = models.ImageField(blank=True, null=True)
     title = models.CharField(max_length=255, default="Album title")
     description = models.CharField(max_length=255, blank=True, null=True)
     artist = models.CharField(max_length=255, default="Artist")
-    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.0)
-    format = models.CharField(max_length=2, choices=[("DD","Digital download"),("CD","CD"),("VN","Vinyl")])
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+    format = models.CharField(max_length=2, choices=[("DD","Digital download"),("CD","CD"),("VN","Vinyl")], default="DD")
     release_date = models.DateField(default=timezone.now().date())
 
     def save(self, *args, **kwargs):

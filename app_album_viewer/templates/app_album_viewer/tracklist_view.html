@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <h2>{{ album.title }} tracklist</h2>
+    <hr>
+
+    <b>Tracklist</b>
+    <table>
+        {% if song_list|length == 0 %} 
+            <tr><td>There are no songs in the album</td></tr>
+        {% else %}
+            {% for song in song_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'song_detail' album.id song.id %}">{{ song.title }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+    <hr>
+    <input type="button" onclick="location.href='{% url 'album_detail' album.id%}';" value="Back" />
+</body>
+
+{% endblock content %}

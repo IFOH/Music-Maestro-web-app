@@ -121,7 +121,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_URL = 'static/'
 
 # Media for uploaded files.
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'sample_data'
 MEDIA_URL = '/media/'
 
 # Email setup.

@@ -17,6 +17,7 @@
                 <tr>
                     <td>
                         <a href="{% url 'album_detail' album.id %}">{{ album.title }}</a>
+                        <img src="/media/{{ album.cover }}"><br>
                     </td>
                 </tr>
             {% endfor %}

@@ -1,7 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
-from django.urls import reverse
 from .models import *
 from .forms import *
 
@@ -13,9 +12,7 @@ def index_view(request):
 def detail_view(request, id):
     context = {}
     current_album = get_object_or_404(Album, pk=id)
-    album_songs = Song.objects.filter(album=current_album)
     album_comments = Comment.objects.filter(album=current_album)
-    context["song_list"] = album_songs
     context["comment_list"] = album_comments
     context["album"] = current_album
     return render(request, 'app_album_viewer/detail_view.html', context)
@@ -66,6 +63,14 @@ def song_detail_view(request, a_id, s_id):
     context["song"] = current_song
     context["album"] = current_album
     return render(request, 'app_album_viewer/song_detail_view.html', context)
+
+def tracklist_view(request, id):
+    context = {}
+    current_album = get_object_or_404(Album, pk=id)
+    album_songs = Song.objects.filter(album=current_album)
+    context["song_list"] = album_songs
+    context["album"] = current_album
+    return render(request, "app_album_viewer/tracklist_view.html", context)
 
 def create_view(request):
     context = {}

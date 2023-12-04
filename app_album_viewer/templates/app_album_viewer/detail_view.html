@@ -6,23 +6,15 @@
     <hr>
     <b>Description</b>
     <p>{{ album.description }}</p>
+    <b>Release date</b>
+    <p>{{ album.release_date }}</p>
     <hr>
+    <b>Cover art</b>
+    <p><img src="/media/{{ album.cover }}"></p>
 
-    <b>Tracklist</b>
-    <table>
-        {% if song_list|length == 0 %} 
-            <tr><td>There are no songs in the album</td></tr>
-        {% else %}
-            {% for song in song_list %}
-                <tr>
-                    <td>
-                        <a href="{% url 'song_detail' album.id song.id %}">{{ song.title }}</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        {% endif %}
-    </table>
+    <hr>
     <input type="button" onclick= "location.href='{%url 'album_edit' album.id %}';" value="Edit album" />
+    <input type="button" onclick="location.href='{% url 'tracklist' album.id %}';" value="Tracklist" />
     <hr>
 
     <b>Comments</b>

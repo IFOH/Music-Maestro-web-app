@@ -8,7 +8,7 @@
     <p>{{ album.title }}</p>
     <b>Runtime</b>
     <p>{{ song.runtime }}</p>
-    <input type="button" onclick="location.href='{% url 'album_detail' album.id%}';" value="Back" />
+    <input type="button" onclick="location.href='{% url 'tracklist' album.id%}';" value="Back" />
 </body>
 
 {% endblock content %}

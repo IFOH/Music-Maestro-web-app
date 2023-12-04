@@ -6,7 +6,7 @@
 {% endblock title%}
 
 {% block content %}
-    <h1>account page</h1>
+    <h1>Account page</h1>
     <hr>
-    <p>This is the account page</p>
+    <p>You are logged in as {{ user.userprofile.display_name|default:user.username }}</p>
 {% endblock content %}
