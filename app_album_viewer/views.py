@@ -31,6 +31,10 @@ def edit_view(request, id):
             if album_form.is_valid():
                 album_form.save()
                 messages.success(request, "Album updated successfully")
+        #Delete album
+        elif "delete_album" in request.POST:
+            Album.objects.filter(id=id).delete()
+            return redirect('albums_index')
         #Add and remove songs from album
         elif "update_song" in request.POST:
             song_to_update = get_object_or_404(Song, title=request.POST.get("song_choice"))

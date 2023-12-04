@@ -1,15 +1,28 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Album(models.Model):
-    title = models.CharField(max_length = 255)
-    description = models.CharField(max_length = 255, blank=True, null=True)
+    cover = None
+    title = models.CharField(max_length=255, default="Album title")
+    description = models.CharField(max_length=255, blank=True, null=True)
+    artist = models.CharField(max_length=255, default="Artist")
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.0)
+    format = models.CharField(max_length=2, choices=[("DD","Digital download"),("CD","CD"),("VN","Vinyl")])
+    release_date = models.DateField(default=timezone.now().date())
+
+    def save(self, *args, **kwargs):
+        if (self.release_date > timezone.now().date() + timezone.timedelta(days=365)):
+            self.release_date = timezone.now().replace(year=self.release_date.year, month=1, day=1).date()
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return self.title
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     display_name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(max_length=255, blank=True, null=True)
     def __str__(self):
         if self.display_name == None:
             return self.user.username
@@ -22,7 +35,7 @@ class Comment(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
 
 class Song(models.Model):
-    title = models.CharField(max_length = 255)
+    title = models.CharField(max_length=255)
     runtime = models.IntegerField(default=0)
     album = models.ManyToManyField(Album, blank=True)
     def __str__(self):

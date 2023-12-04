@@ -21,6 +21,11 @@
         {{ album_form.as_p }}
         <button type="submit" name="update_album">Update</button>
     </form>
+    <form method = "POST">
+        {% csrf_token %}
+        <button type="submit" name="delete_album">Delete</button>
+    </form>
+    <br>
 
     <b>Edit tracklist</b>
     <table>
