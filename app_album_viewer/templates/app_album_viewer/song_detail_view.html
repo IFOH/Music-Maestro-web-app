@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <h2>{{ song.title }}</h2>
+    <hr>
+    <b>Album</b>
+    <p>{{ album.title }}</p>
+    <b>Runtime</b>
+    <p>{{ song.runtime }}</p>
+    <input type="button" onclick="location.href='{% url 'album_detail' album.id%}';" value="Back" />
+</body>
+
+{% endblock content %}

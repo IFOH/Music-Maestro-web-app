@@ -55,6 +55,13 @@ def edit_view(request, id):
     context["album_form"] = album_form
     return render(request, 'app_album_viewer/edit_view.html', context)
 
+def song_detail_view(request, a_id, s_id):
+    context = {}
+    current_album = get_object_or_404(Album, pk=a_id)
+    current_song = get_object_or_404(Song, pk=s_id)
+    context["song"] = current_song
+    context["album"] = current_album
+    return render(request, 'app_album_viewer/song_detail_view.html', context)
 
 def create_view(request):
     context = {}

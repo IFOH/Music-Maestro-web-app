@@ -127,3 +127,5 @@ MEDIA_URL = '/media/'
 # Email setup.
 DEFAULT_FROM_EMAIL = 'noreply@mymusicmaestro.net'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGOUT_REDIRECT_URL = 'home'

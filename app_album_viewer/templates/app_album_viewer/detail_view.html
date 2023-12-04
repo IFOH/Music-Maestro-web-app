@@ -16,7 +16,7 @@
             {% for song in song_list %}
                 <tr>
                     <td>
-                        {{ song.title }}
+                        <a href="{% url 'song_detail' album.id song.id %}">{{ song.title }}</a>
                     </td>
                 </tr>
             {% endfor %}

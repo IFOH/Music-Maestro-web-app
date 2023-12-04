@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from . forms import *
 
 
@@ -33,6 +33,10 @@ def login(request):
             else:
                 messages.error(request, "Invalid login details")
         return render(request, 'app_pages/login_view.html',context)
+
+def logout(request):
+    auth_logout(request)
+    return redirect('home')
 
 @login_required(login_url="login")
 def account(request):

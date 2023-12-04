@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Album)
 admin.site.register(Song)
 admin.site.register(Comment)
+admin.site.register(UserProfile)
