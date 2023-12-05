@@ -3,7 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
-from app_album_viewer.models import Album
+from app_album_viewer.models import Album, UserProfile
+from django.utils.translation import gettext as _
 from . forms import *
 
 def home(request):
@@ -56,4 +57,10 @@ def rec_friend(request):
     id = request.GET.get('album')
     current_album = get_object_or_404(Album, pk=id)
     context["album"] = current_album
+    context["trans_msgs"] = {   "rec_subject": _("RecommendEmailSubject"),
+                                "rec_msg": _("RecommendEmailMessage") % {"album": current_album}}
+
+    if request.user.is_authenticated:
+        context["trans_msgs"]["rec_msg_user"] = _("RecommendEmailMessageWithUser") % {"album": current_album, "user": UserProfile.objects.get(user=request.user)}
+
     return render(request, 'app_pages/rec_friend_view.html',context)

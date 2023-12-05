@@ -137,5 +137,47 @@
         "Biggest Hits Compilation"
       ]
     }
+  ],
+  "user_profiles": [
+    {
+      "user": {
+        "username": "user",
+        "password": "password"
+      },
+      "display_name": null,
+      "email": "user@example.com"
+    },
+    {
+      "user": {
+        "username": "test_user_1",
+        "password": "password"
+      },
+      "display_name": "AnnaB93",
+      "email": null
+    },
+    {
+      "user": {
+        "username": "test_user_2",
+        "password": "password"
+      },
+      "display_name": "jc2",
+      "email": null
+    },
+    {
+      "user": {
+        "username": "test_user_3",
+        "password": "password"
+      },
+      "display_name": "jonManco",
+      "email": null
+    },
+    {
+      "user": {
+        "username": "someguy",
+        "password": "password"
+      },
+      "display_name": null,
+      "email": null
+    }
   ]
 }
