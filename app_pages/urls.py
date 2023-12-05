@@ -7,5 +7,6 @@ urlpatterns = [
     path('account/', views.account, name = "account"),
     path('about/', views.about, name = "about"),
     path('login/', views.login, name = "login"),
-    path('logout/', views.logout, name="logout"),
+    path('logout/', views.logout, name = "logout"),
+    path('recommend-a-friend/', views.rec_friend, name = "rec_friend"),
 ]

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    <title>Recommend a friend</title>
+{% endblock title%}
+
+{% block content %}
+    <h1>Recommend {{ album.title }} to a friend</h1>
+    <hr>
+
+    <p>{% trans "RecommendEmailSubject" %}</p>
+
+    <p>Album: {{ album.title }}</p>
+    {% blocktrans %}
+        Why not take a look at this album I think you'll enjoy? It's called {{ album.title }}.
+    {% endblocktrans %}
+
+    <input type="button" onclick="location.href='{% url 'album_detail' album.id%}';" value="Back" />
+{% endblock content %}

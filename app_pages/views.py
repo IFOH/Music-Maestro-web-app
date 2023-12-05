@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
+from app_album_viewer.models import Album
 from . forms import *
-
 
 def home(request):
     context = {}
@@ -21,10 +21,11 @@ def about(request):
 def login(request):
     if request.user.is_authenticated:
         return redirect('account')
-    else:
-        context = {}
-        form = LoginForm(request.POST or None)
-        if(request.method == 'POST'):
+    
+    context = {}
+    form = LoginForm(request.POST or None)
+    if(request.method == 'POST'):
+        if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
@@ -36,10 +37,10 @@ def login(request):
                 if not User.objects.filter(username=username).exists():
                     messages.error(request, "User does not exist")
                 else:
-                    form.fields['username'].initial = username
                     messages.error(request, "Incorrect password")
-        context["form"] = form
-        return render(request, 'app_pages/login_view.html',context)
+            form.fields['username'].initial = username
+    context["form"] = form
+    return render(request, 'app_pages/login_view.html',context)
 
 def logout(request):
     auth_logout(request)
@@ -49,3 +50,10 @@ def logout(request):
 def account(request):
     context = {}
     return render(request, 'app_pages/account_view.html',context)
+
+def rec_friend(request):
+    context = {}
+    id = request.GET.get('album')
+    current_album = get_object_or_404(Album, pk=id)
+    context["album"] = current_album
+    return render(request, 'app_pages/rec_friend_view.html',context)

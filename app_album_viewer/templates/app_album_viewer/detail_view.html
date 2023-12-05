@@ -15,6 +15,10 @@
     <hr>
     <input type="button" onclick= "location.href='{%url 'album_edit' album.id %}';" value="Edit album" />
     <input type="button" onclick="location.href='{% url 'tracklist' album.id %}';" value="Tracklist" />
+    <form action="{% url 'rec_friend' %}" method="GET">
+        <input type="hidden" name="album" value="{{ album.id }}">
+        <button type="submit">Recommend a Friend</button>
+    </form>
     <hr>
 
     <b>Comments</b>
