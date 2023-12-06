@@ -9,4 +9,11 @@
     <h1>Account page</h1>
     <hr>
     <p>You are logged in as {{ user.userprofile.display_name|default:user.username }}</p>
+    <p>Your username is {{ user.username }}</p>
+
+    <b>Comments</b>
+    {% for comment in user.userprofile.comment_set.all %}
+        <p>{{ comment.album.title }}: {{ comment.text }}</p><br>
+    {% endfor %}
+
 {% endblock content %}
