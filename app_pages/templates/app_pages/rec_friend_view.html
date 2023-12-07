@@ -9,12 +9,12 @@
 {% block content %}
     <h1>Recommend {{ album.title }} to a friend</h1>
     <hr>
-    
-    <p>{{ trans_msgs.rec_subject }}</p>
 
-    <p>Test Album: {{ album.title }}</p>
-    <p>{{ trans_msgs.rec_msg }}</p>
-    <p>{{ trans_msgs.rec_msg_user }}</p>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Send">
+    </form>
 
     <input type="button" onclick="location.href='{% url 'album_detail' album.id%}';" value="Back" />
 {% endblock content %}

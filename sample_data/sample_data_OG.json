@@ -7,7 +7,21 @@
       "artist": "Jonathan Rocs",
       "price": 5,
       "format": "Vinyl",
-      "release_date": "2023-06-06"      
+      "release_date": "2023-06-06",
+      "comments": [
+        {
+          "user__display_name": "AnnaB93",
+          "message": "Not a fan to be honest"
+        },
+        {
+          "user__display_name": "AnnaB93",
+          "message": "Actually, it's pretty good"
+        },
+        {
+          "user__display_name": "jc2",
+          "message": "Best album yet!!!!"
+        }
+      ]
     },
     {
       "cover": "music-for-cats.png",
@@ -16,7 +30,21 @@
       "artist": "MyCatMusicCo",
       "price": 35,
       "format": "Digital download",
-      "release_date": "2023-06-06"
+      "release_date": "2023-06-06",
+      "comments": [
+        {
+          "user__display_name": "jonManco",
+          "message": "My cats and I love it"
+        },
+        {
+          "user__display_name": "AnnaB93",
+          "message": "Is this for cats or humans?? Kind of liking it"
+        },
+        {
+          "user__display_name": "jc2",
+          "message": "Far too expensive :-("
+        }
+      ]
     },
     {
       "cover": "my-red-house.png",
@@ -25,7 +53,17 @@
       "artist": "Agnes Merrello",
       "price": 3,
       "format": "CD",
-      "release_date": "2023-06-06"
+      "release_date": "2023-06-06",
+      "comments": [
+        {
+          "user__display_name": "jonManco",
+          "message": "CD isn't worth it, go for vinyl one"
+        },
+        {
+          "user__display_name": "jc2",
+          "message": "Arrived scratched :'-("
+        }
+      ]
     },
     {
       "cover": "my-red-house.png",
@@ -34,7 +72,13 @@
       "artist": "Agnes Merrello",
       "price": 12,
       "format": "Vinyl",
-      "release_date": "2023-06-06"
+      "release_date": "2023-06-06",
+      "comments": [
+        {
+          "user__display_name": "jonManco",
+          "message": "Vinyl is the best version!"
+        }
+      ]
     },
     {
       "cover": "our-technicolour-world.png",
@@ -43,7 +87,13 @@
       "artist": "pippumpkin",
       "price": 1.99,
       "format": "Digital download",
-      "release_date": "2023-06-06"
+      "release_date": "2023-06-06",
+      "comments": [
+        {
+          "user": "someguy",
+          "message": "first"
+        }
+      ]
     },
     {
       "cover": "sealife.png",
@@ -52,7 +102,13 @@
       "artist": "Tom Turle and Friends",
       "price": 0,
       "format": "Digital download",
-      "release_date": "2023-06-06"
+      "release_date": "2023-06-06",
+      "comments": [
+        {
+          "user": "",
+          "message": ""
+        }
+      ]
     },
     {
       "cover": null,
@@ -61,7 +117,13 @@
       "artist": "Songster",
       "price": 1.99,
       "format": "Digital download",
-      "release_date": "2023-06-06"
+      "release_date": "2023-06-06",
+      "comments": [
+        {
+          "user": "",
+          "message": ""
+        }
+      ]
     }
   ],
   "songs": [
@@ -136,48 +198,6 @@
         "My Red House",
         "Biggest Hits Compilation"
       ]
-    }
-  ],
-  "user_profiles": [
-    {
-      "user": {
-        "username": "user",
-        "password": "password"
-      },
-      "display_name": null,
-      "email": "user@example.com"
-    },
-    {
-      "user": {
-        "username": "test_user_1",
-        "password": "password"
-      },
-      "display_name": "AnnaB93",
-      "email": null
-    },
-    {
-      "user": {
-        "username": "test_user_2",
-        "password": "password"
-      },
-      "display_name": "jc2",
-      "email": null
-    },
-    {
-      "user": {
-        "username": "test_user_3",
-        "password": "password"
-      },
-      "display_name": "jonManco",
-      "email": null
-    },
-    {
-      "user": {
-        "username": "someguy",
-        "password": "password"
-      },
-      "display_name": null,
-      "email": null
     }
   ]
 }

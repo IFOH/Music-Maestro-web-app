@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class Album(models.Model):
-    cover = models.ImageField(blank=True, null=True)
+    cover = models.ImageField(default="default-cover.png")
     title = models.CharField(max_length=255, default="Album title")
     description = models.CharField(max_length=255, blank=True, null=True)
     artist = models.CharField(max_length=255, default="Artist")
@@ -22,7 +22,6 @@ class Album(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     display_name = models.CharField(max_length=255, blank=True, null=True)
-    email = models.EmailField(max_length=255, blank=True, null=True)
     def __str__(self):
         if self.display_name == None:
             return self.user.username

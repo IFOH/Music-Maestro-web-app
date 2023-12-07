@@ -1,6 +1,6 @@
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
+from django.urls import reverse
 from .models import *
 from .forms import *
 
@@ -30,7 +30,7 @@ def edit_view(request, id):
                 messages.success(request, "Album updated successfully")
         #Delete album
         elif "delete_album" in request.POST:
-            Album.objects.filter(id=id).delete()
+            current_album.delete()
             return redirect('albums_index')
         #Add and remove songs from album
         elif "update_song" in request.POST:
@@ -41,7 +41,7 @@ def edit_view(request, id):
             else:
                 current_album.song_set.add(song_to_update)
                 messages.success(request, "Song added")
-            return redirect('album_edit', id=id)
+            return redirect(reverse('album_edit', args=[id]))
 
     #Context dictionary
     song_list = []
@@ -70,7 +70,7 @@ def tracklist_view(request, id):
     album_songs = Song.objects.filter(album=current_album)
     context["song_list"] = album_songs
     context["album"] = current_album
-    return render(request, "app_album_viewer/tracklist_view.html", context)
+    return render(request, 'app_album_viewer/tracklist_view.html', context)
 
 def create_view(request):
     context = {}
@@ -81,4 +81,4 @@ def create_view(request):
             return redirect('albums_index')
     else:
         context["form"] = form
-        return render(request, "app_album_viewer/create_view.html", context)
+        return render(request, 'app_album_viewer/create_view.html', context)

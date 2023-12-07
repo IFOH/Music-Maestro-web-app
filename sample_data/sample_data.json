@@ -1,4 +1,42 @@
 {
+  "user_profiles": [
+    {
+      "user": {
+        "username": "user",
+        "password": "password",
+        "email": "user@example.com"
+      },
+      "display_name": null
+    },
+    {
+      "user": {
+        "username": "test_user_1",
+        "password": "password"
+      },
+      "display_name": "AnnaB93"
+    },
+    {
+      "user": {
+        "username": "test_user_2",
+        "password": "password"
+      },
+      "display_name": "jc2"
+    },
+    {
+      "user": {
+        "username": "test_user_3",
+        "password": "password"
+      },
+      "display_name": "jonManco"
+    },
+    {
+      "user": {
+        "username": "someguy",
+        "password": "password"
+      },
+      "display_name": null
+    }
+  ],
   "albums": [
     {
       "cover": "dripping-stereo.png",
