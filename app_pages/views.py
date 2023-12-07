@@ -27,7 +27,7 @@ def login(request):
     
     context = {}
     form = LoginForm(request.POST or None)
-    if(request.method == 'POST'):
+    if(request.method == "POST"):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -54,6 +54,7 @@ def account(request):
     context = {}
     return render(request, 'app_pages/account_view.html',context)
 
+@login_required(login_url="login")
 def rec_friend(request):
     context = {}
     id = request.GET.get("album")
@@ -69,6 +70,7 @@ def rec_friend(request):
             message = form.cleaned_data["message"]
             try:
                 send_mail(subject=subject,message=message,from_email=settings.DEFAULT_FROM_EMAIL,recipient_list=[recipient_email])
+                messages.success(request, "Email sent")
                 return redirect('album_detail', id=id)
             except BadHeaderError:
                 messages.error(request, "Invalid characters")
