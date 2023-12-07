@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from .models import *
 
-class TestViews(TestCase):
+class TestAlbumViewerViews(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="user", password="password")
         self.user_profile = UserProfile.objects.create(user=self.user, display_name="Test User")
@@ -87,6 +87,13 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 302)  #successful redirect
         self.assertTrue(Album.objects.filter(title="New Album").exists())
 
+        #check invalid data
+        create_data = {
+            "description": "New Album Description"
+        }
+        response = self.client.post(reverse("album_create"), create_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "This field is required.")
 
     def test_tracklist_view(self):
         #check if songs are listed
@@ -96,5 +103,8 @@ class TestViews(TestCase):
         self.assertIn(self.song,song_list)
 
     def test_song_detail_view(self):
+        #check if the correct song and album are listed
         response = self.client.get(reverse("song_detail", args=[self.album.id, self.song.id]))
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.song,response.context["song"])
+        self.assertEqual(self.album,response.context["album"])

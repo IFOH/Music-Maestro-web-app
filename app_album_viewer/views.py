@@ -79,6 +79,6 @@ def create_view(request):
         if form.is_valid():
             form.save()
             return redirect('albums_index')
-    else:
-        context["form"] = form
-        return render(request, 'app_album_viewer/create_view.html', context)
+    
+    context["form"] = form
+    return render(request, 'app_album_viewer/create_view.html', context)
