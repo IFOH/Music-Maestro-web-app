@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
+from datetime import datetime
 from .models import *
 
 class TestAlbumViewerViews(TestCase):
@@ -33,6 +34,11 @@ class TestAlbumViewerViews(TestCase):
         self.assertEqual(response.status_code, 200)
         post_data = {
             "title": "Updated Album Title",
+            "artist": self.album.artist,
+            "release_date": self.album.release_date,
+            "format": self.album.format,
+            "price": self.album.price,
+            "cover": self.album.cover,
             "update_album": ""
         }
         response_post = self.client.post(url, post_data, follow=True)
@@ -81,19 +87,24 @@ class TestAlbumViewerViews(TestCase):
         response = self.client.get(reverse("album_create"))
         self.assertEqual(response.status_code, 200)
         create_data = {
-            "title": "New Album"
+            "title": "New Album",
+            "artist": "Artist",
+            "price": "0.00",
+            "format": "DD",
+            "release_date": "2000-1-1",
         }
         response = self.client.post(reverse("album_create"), create_data)
         self.assertEqual(response.status_code, 302)  #successful redirect
         self.assertTrue(Album.objects.filter(title="New Album").exists())
 
-        #check invalid data
+        #check invalid data (no title)
         create_data = {
-            "description": "New Album Description"
+            "description": "description"
         }
         response = self.client.post(reverse("album_create"), create_data)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "This field is required.")
+        form = response.context["form"]
+        self.assertTrue(form.errors)
 
     def test_tracklist_view(self):
         #check if songs are listed

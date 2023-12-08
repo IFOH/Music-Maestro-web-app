@@ -13,6 +13,7 @@ class AlbumForm(forms.ModelForm):
             'title': forms.TextInput(attrs={
                 'class': 'formfield',
                 'placeholder': 'Album Title',
+                'style': 'width: 20%',
             }),
             'description': forms.Textarea(attrs={
                 'class': 'formfield',
@@ -21,6 +22,7 @@ class AlbumForm(forms.ModelForm):
             'artist': forms.TextInput(attrs={
                 'class': 'formfield',
                 'placeholder': 'Artist',
+                'style': 'width: 20%',
             }),
             'price': forms.NumberInput(attrs={
                 'class': 'formfield',
@@ -32,6 +34,6 @@ class AlbumForm(forms.ModelForm):
             'release_date': forms.DateInput(attrs={
                 'class': 'formfield',
                 'placeholder': 'Release Date (YYYY-MM-DD)',
-                'style': 'width: 15%',
+                'style': 'width: 20%',
             }),
         }

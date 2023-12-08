@@ -31,6 +31,7 @@ def edit_view(request, id):
         #Delete album
         elif "delete_album" in request.POST:
             current_album.delete()
+            messages.success(request, "Album removed")
             return redirect('albums_index')
         #Add and remove songs from album
         elif "update_song" in request.POST:
@@ -78,6 +79,7 @@ def create_view(request):
     if(request.method == 'POST'):
         if form.is_valid():
             form.save()
+            messages.success(request, "Album added")
             return redirect('albums_index')
     
     context["form"] = form

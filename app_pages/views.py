@@ -52,6 +52,7 @@ def logout(request):
 @login_required(login_url="login")
 def account(request):
     context = {}
+    context["comment_list"] = request.user.userprofile.comment_set.all()
     return render(request, 'app_pages/account_view.html',context)
 
 @login_required(login_url="login")

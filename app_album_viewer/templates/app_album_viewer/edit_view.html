@@ -1,44 +1,60 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}
     <title>Edit {{ album.title }}</title>
 {% endblock title %}
 
 {% block content %}
     <div class="container">
-        <h1 class="title">Edit album and tracklist</h1>
+        <h2 class="title is-2">Edit album and tracklist</h2>
         <hr>
 
         <div class="content">
-            <b>Edit album</b>
+            <h4 class="title is-4">Edit album</h4>
+
             <form method="POST">
                 {% csrf_token %}
-                {{ album_form.as_p }}
+                {% for field in album_form %}
+                    <div class="field">
+                        <label class="label">{{ field.label }}:</label>
+                        <div class="control">
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endfor %}
                 <button class="button is-primary" type="submit" name="update_album">Update</button>
             </form>
+
+            <div style="margin-top: 10px;"></div>
+
             <form method="POST">
                 {% csrf_token %}
                 <button class="button is-danger" type="submit" name="delete_album">Delete</button>
             </form>
+
         </div>
         
         <hr>
 
         <div class="content">
-            <b>Edit tracklist</b>
+            <h4 class="title is-4">Edit tracklist</h4>
             <table class="table">
                 <tbody>
                     {% for song in song_list %}
                         <tr>
                             <td>
-                                <form method="POST">
+                                <form method="POST" class="is-flex">
                                     {% csrf_token %}
-                                    {{ song.obj.title }}
                                     <input type="hidden" name="song_choice" value="{{ song.obj.title }}">
-                                    {% if song.in_album %}
-                                        <button class="button is-danger" type="submit" name="update_song">Remove</button>
-                                    {% else %}
-                                        <button class="button is-success" type="submit" name="update_song">Add</button>
-                                    {% endif %}
+                                    <div class="control mr-5">
+                                        {% if song.in_album %}
+                                            <button class="button is-danger" type="submit" name="update_song">Remove</button>
+                                        {% else %}
+                                            <button class="button is-success" type="submit" name="update_song">Add</button>
+                                        {% endif %}
+                                    </div>
+                                    {{ song.obj.title }}
                                 </form>
                             </td>
                         </tr>
@@ -49,7 +65,7 @@
 
         <div class="field">
             <div class="control">
-                <button class="button is-link" onclick="location.href='{% url 'album_detail' album.id%}'">Back</button>
+                <button class="button is-link" onclick="location.href='{% url 'album_detail' album.id%}';">Back</button>
             </div>
         </div>
     </div>

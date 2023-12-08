@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class Album(models.Model):
-    cover = models.ImageField(default="default-cover.png")
+    cover = models.ImageField(default="default-cover.png", upload_to="media/")
     title = models.CharField(max_length=255, default="Album title")
     description = models.CharField(max_length=255, blank=True, null=True)
     artist = models.CharField(max_length=255, default="Artist")

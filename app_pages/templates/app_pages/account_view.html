@@ -19,10 +19,10 @@
 
         <div class="content">
             <b>Comments</b>
-            {% if album_list|length == 0 %}
+            {% if comment_list|length == 0 %}
                 <p>You have no comments</p>
             {% else %}
-                {% for comment in user.userprofile.comment_set.all %}
+                {% for comment in comment_list %}
                     <p>{{ comment.album.title }}: {{ comment.text }}</p><br>
                 {% endfor %}
             {% endif %}
