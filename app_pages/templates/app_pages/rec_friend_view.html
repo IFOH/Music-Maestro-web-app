@@ -7,14 +7,29 @@
 {% endblock title%}
 
 {% block content %}
-    <h1>Recommend {{ album.title }} to a friend</h1>
+    <h1 class="title is-2">Recommend {{ album.title }} to a friend</h1>
     <hr>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Send">
-    </form>
+        
+        {% for field in form %}
+            <div class="field">
+                <label class="label">{{ field.label }}</label>
+                <div class="control">
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
 
-    <input type="button" onclick="location.href='{% url 'album_detail' album.id%}';" value="Back" />
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary" type="submit">Send</button>
+            </div>
+            <div class="control">
+                <button class="button is-primary" onclick="location.href='{% url 'album_detail' album.id%}';">Back</button>
+            </div>
+        </div>
+    </form>
+    
 {% endblock content %}

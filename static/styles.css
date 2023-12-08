@@ -1,0 +1,12 @@
+.custom-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.custom-blue-colour {
+    background-color: rgb(134, 201, 239);
+}
+
+.underline-text {
+    text-decoration: underline;
+}

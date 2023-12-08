@@ -3,17 +3,29 @@
 
 {% block title %}
     <title>Account</title>
-{% endblock title%}
+{% endblock title %}
 
 {% block content %}
-    <h1>Account page</h1>
-    <hr>
-    <p>You are logged in as {{ user.userprofile.display_name|default:user.username }}</p>
-    <p>Your username is {{ user.username }}</p>
+    <div class="container">
+        <h1 class="title">Account page</h1>
+        <hr>
 
-    <b>Comments</b>
-    {% for comment in user.userprofile.comment_set.all %}
-        <p>{{ comment.album.title }}: {{ comment.text }}</p><br>
-    {% endfor %}
+        <div class="box has-background-primary">
+            <p class="underline-text">
+                You are logged in as {{ user.userprofile.display_name|default:user.username }}<br>
+                Your username is {{ user.username }}
+            </p>
+        </div>
 
+        <div class="content">
+            <b>Comments</b>
+            {% if album_list|length == 0 %}
+                <p>You have no comments</p>
+            {% else %}
+                {% for comment in user.userprofile.comment_set.all %}
+                    <p>{{ comment.album.title }}: {{ comment.text }}</p><br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 {% endblock content %}

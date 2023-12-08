@@ -1,9 +1,32 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>New Album</title>
+{% endblock title%}
+
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create">
-    <input type="button" onclick="location.href='{% url 'albums_index' %}';" value="Cancel" />
-</form>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data" class="box">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="field">
+                    <label class="label">{{ field.label }}:</label>
+                    <div class="control">
+                        {{ field }}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <input type="submit" class="button is-primary" value="Create">
+                </div>
+                <div class="control">
+                    <button class="button is-danger" onclick="location.href='{% url 'albums_index' %}';">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock content %}

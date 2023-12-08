@@ -1,14 +1,28 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>{{ song.title }}</title>
+{% endblock title %}
+
 {% block content %}
+    <div class="container">
+        <h1 class="title">{{ song.title }}</h1>
+        <hr>
 
-<body>
-    <h2>{{ song.title }}</h2>
-    <hr>
-    <b>Album</b>
-    <p>{{ album.title }}</p>
-    <b>Runtime</b>
-    <p>{{ song.runtime }}</p>
-    <input type="button" onclick="location.href='{% url 'tracklist' album.id%}';" value="Back" />
-</body>
+        <div class="content">
+            <b>Album</b>
+            <p>{{ album.title }}</p>
+            <b>Runtime</b>
+            <p>{{ song.runtime }}</p>
+        </div>
 
+        <hr>
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" onclick="location.href='{% url 'tracklist' album.id%}';">Back</button>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

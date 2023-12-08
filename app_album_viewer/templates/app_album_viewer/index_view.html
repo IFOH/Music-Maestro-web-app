@@ -3,26 +3,37 @@
 
 {% block title %}
     <title>Albums</title>
-{% endblock title%}
+{% endblock title %}
 
 {% block content %}
-    <h1>Albums list</h1>
-    <hr>
-    <b>Title<b>
-    <table>
-        {% if album_list|length == 0 %}
-            <tr><td>There are no albums</td></tr>
-        {% else %}
-            {% for album in album_list%}
-                <tr>
-                    <td>
-                        <a href="{% url 'album_detail' album.id %}">{{ album.title }}</a>
-                        <img src="/media/{{ album.cover }}"><br>
-                    </td>
-                </tr>
-            {% endfor %}
-        {% endif %}
-    </table>
-    <input type="button" onclick= "location.href='{%url 'album_create' %}';" value="Add album" />
-    </hr>
+    <div class="container">
+        <h1 class="title">Albums List</h1>
+        <hr>
+
+        <table class="table is-bordered">
+            {% if album_list|length == 0 %}
+                <tr><td>There are no albums</td></tr>
+            {% else %}
+                {% for album in album_list %}
+                    <tr>
+                        <td>
+                            <div class="content">
+                                <a href="{% url 'album_detail' album.id %}" class="has-text-dark underline-text">
+                                    <strong>{{ album.title }} ({{ album.format }})</strong>
+                                    <p>by {{ album.artist }}</p>
+                                </a>
+                                <img src="/media/{{ album.cover }}" class="image is-10by3 p-2">
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-primary" onclick="location.href='{% url 'album_create' %}';">Add Album</button>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

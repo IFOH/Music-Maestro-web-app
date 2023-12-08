@@ -1,41 +1,78 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
-<body>
-    <h2>{{ album.title }}</h2>
-    <hr>
-    <b>Description</b>
-    <p>{{ album.description }}</p>
-    <b>Release date</b>
-    <p>{{ album.release_date }}</p>
-    <hr>
-    <b>Cover art</b>
-    <p><img src="/media/{{ album.cover }}"></p>
+{% block title %}
+    <title>{{ album.title }}</title>
+{% endblock title %}
 
-    <hr>
-    <input type="button" onclick= "location.href='{%url 'album_edit' album.id %}';" value="Edit album" />
-    <input type="button" onclick="location.href='{% url 'tracklist' album.id %}';" value="Tracklist" />
-    <form action="{% url 'rec_friend' %}" method="GET">
-        <input type="hidden" name="album" value="{{ album.id }}">
-        <button type="submit">Recommend a Friend</button>
-    </form>
+<div class="container">
+    <h2 class="title is-2">{{ album.title }}</h2>
     <hr>
 
-    <b>Comments</b>
-    <table>
-        {% if comment_list|length == 0 %} 
-            <tr><td>There are no comments</td></tr>
-        {% else %}
-            {% for comment in comment_list %}
-                <tr>
-                    <td>
-                        <b>{{ comment.user }}</b>: {{ comment.text }}<br>
-                    </td>
-                </tr>
-            {% endfor %}
-        {% endif %}
-    </table>
-    <input type="button" onclick="location.href='{% url 'albums_index' %}';" value="Back" />
-</body>
+    <div class="content">
+        <b>Description</b>
+        <p>{{ album.description }}</p>
+        <b>Artist</b>
+        <p>{{ album.artist }}</p>
+        <b>Price</b>
+        <p>£{{ album.price }}</p>
+        <b>Format</b>
+        <p>{{ album.format }}</p>
+        <b>Release date</b>
+        <p>{{ album.release_date }}</p>
+    </div>
+    <hr>
+
+    <div class="content">
+        <b>Cover art</b>
+        <img src="/media/{{ album.cover }}" class="image is-10by3">
+    </div>
+
+    <hr>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <a href="{% url 'album_edit' album.id %}" class="button is-info">Edit Album</a>
+        </div>
+        <div class="control">
+            <a href="{% url 'tracklist' album.id %}" class="button is-primary">Tracklist</a>
+        </div>
+        <div class="control">
+            <form action="{% url 'rec_friend' %}" method="GET">
+                <input type="hidden" name="album" value="{{ album.id }}">
+                <button class="button is-warning" type="submit">Recommend a Friend</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+
+    <div class="content">
+        <b>Comments</b>
+        <table class="table is-fullwidth">
+            <tbody>
+                {% if comment_list|length == 0 %} 
+                    <tr><td>There are no comments</td></tr>
+                {% else %}
+                    {% for comment in comment_list %}
+                        <tr>
+                            <td>
+                                <b>{{ comment.user }}</b>: {{ comment.text }}<br>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+
+    <div class="field">
+        <div class="control">
+            <a href="{% url 'albums_index' %}" class="button is-link">Back</a>
+        </div>
+    </div>
+</div>
+
 
 {% endblock content %}

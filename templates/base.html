@@ -1,45 +1,84 @@
 {% load static %}
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     {% block title %}
-    <title>My Music Maestro</title>
     {% endblock title%}
 </head>
 <body>
     {% block header %}
-    <a href='/'>Home</a>
-    <a href='/albums/'>Albums</a>
-    <a href='/contact/'>Contact</a>
-    <a href='/about/'>About</a>
-    <a href='/account/'>Account</a>
-    {% if user.is_authenticated %}
-        Hi {{ user.userprofile.display_name|default:user.username }}!
-        <a href="{% url 'logout' %}">Log Out</a>
-    {% else %}
-        You are not logged in
-        <a href="{% url 'login' %}">Log In</a>
-    {% endif %}
-    <hr>
+    <section class="custom-section has-background-white-ter">
+        <div class="is-fluid pl-4 pr-4">
+            <div class="navbar-brand custom-blue-colour">
+                <a class="navbar-item" href="/">
+                    <img src="/media/site-logo.png">
+                    <span class="ml-2 has-text-weight-bold">My Music Maestro</span>
+                </a>
+            </div>
+            <nav class="navbar has-background-white-ter">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/">
+                        Home
+                    </a>
+                    <a class="navbar-item" href="/albums/">
+                        Albums
+                    </a>
+                    <a class="navbar-item" href="/contact/">
+                        Contact
+                    </a>
+                    <a class="navbar-item" href="/about/">
+                        About
+                    </a>
+                    <a class="navbar-item" href="/account/">
+                        Account
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        {% if user.is_authenticated %}
+                            <span class="mr-3">Hi {{ user.userprofile.display_name|default:user.username }}!</span>
+                            <a class="button is-danger" href="{% url 'logout' %}">Log Out</a>
+                        {% else %}
+                            <span class="mr-3">You are not logged in</span>
+                            <a class="button is-info" href="{% url 'login' %}">Log In</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
     {% endblock header %}
+    <hr>
 
     {% if messages %}
-        <div class="messages">
+        <div class="container">
             {% for message in messages %}
-                <script>
-                    alert('{{ message }}');
-                </script>
+                <div class="notification is-info">
+                    {{ message }}
+                </div>
             {% endfor %}
         </div>
     {% endif %}
 
-    {% block content %}
-    {% endblock content %}
+    <section class="custom-section">
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </section>
 
     {% block footer %}
-    <hr>
-    <p>This is my footer</p>
+    <footer class="footer has-background-white-ter">
+        <div class="content has-text-centered">
+            <p>Footer Content</p>
+        </div>
+    </footer>
     {% endblock footer %}
 </body>
-</html> 
+</html>
