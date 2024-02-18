@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+    <title>{{ album.title }} tracklist</title>
+{% endblock title %}
+
 {% block content %}
     <div class="container">
         <h1 class="title">{{ album.title }} tracklist</h1>
